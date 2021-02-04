@@ -1,25 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react'
 
-function App() {
+import 'bootstrap/dist/css/bootstrap.min.css'
+import Button from 'react-bootstrap/Button'
+
+import Product from './components/Products'
+import productService from './services/products'
+
+const App = () => {
+
+  const [products, setProducts] = useState([])
+
+  useEffect(() => {
+    productService.getAll('gloves')
+    .then(prod => {
+      setProducts(prod)
+    })
+  }, [])
+
+  const handleButtonClick = (product) => {
+    productService.getAll(product)
+    .then(prod => {
+      setProducts(prod)
+    })
+  }
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <div>
+        <h1><b>Welcome to warehouse-web app</b></h1>
+      </div>
+      <div>
+        <Button variant="primary" onClick={() => handleButtonClick('gloves')}>Gloves</Button>{' '}
+        <Button variant="primary" onClick={() => handleButtonClick('facemasks')}>Facemasks</Button>{' '}
+        <Button variant="primary" onClick={() => handleButtonClick('beanies')}>Beanies</Button>{' '} 
+        <p></p>
+        <Product products={products} />
+      </div>
     </div>
-  );
+  ) 
+
 }
 
 export default App;
