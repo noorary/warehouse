@@ -1,32 +1,43 @@
 import React from 'react'
 
-import Table from 'react-bootstrap/Table'
-import Pagination from "react-bootstrap/Pagination"
+import BootstrapTable from 'react-bootstrap-table-next'
+import paginationFactory from 'react-bootstrap-table2-paginator'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min.css'
 
 const Product = ({ products }) => {
 
+  const columns = [
+    { dataField: 'type', text: 'Type'},
+    { dataField: 'name', text: 'Name'},
+    { dataField: 'color', text: 'Color'},
+    { dataField: 'price', text: 'Price'},
+    { dataField: 'manufacturer', text: 'Manufacturer'}
+  ]
+
+  const pagination = paginationFactory({
+    page: 1,
+    sizePerPage: 10,
+    lastPageText: '>>',
+    firstPageText: '<<',
+    nextPageText: '>',
+    prePageText: '<',
+    showTotal: true,
+    alwaysShowAllBtns: true,
+    onPageChange: function (page, sizePerPage) {
+      console.log('page', page);
+      console.log('sizePerPage', sizePerPage);
+    },
+    onSizePerPageChange: function (page, sizePerPage) {
+      console.log('page', page);
+      console.log('sizePerPage', sizePerPage);
+    }
+  });
+
   return (
-    <Table striped bordered hover>
-      <thead>
-        <tr>
-          <th>Type</th>
-          <th>Name</th>
-          <th>Color</th>
-          <th>Price</th>
-          <th>Manufacturer</th>
-        </tr>
-      </thead>
-      <tbody>
-        {products.map(p =>
-          <tr key={p.id}>
-            <td>{p.type}</td>
-            <td>{p.name}</td>
-            <td>{p.color[0]}</td>
-            <td>{p.price}</td>
-            <td>{p.manufacturer}</td>
-          </tr>)}
-      </tbody>
-    </Table>
+    <div className="productTable">
+      <BootstrapTable pagination={pagination} keyField='id' data={products} columns={columns} />
+    </div>
   )
 }
 
