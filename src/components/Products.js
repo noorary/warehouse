@@ -7,20 +7,6 @@ import 'react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.m
 
 const Product = ({ products }) => {
 
-  function stockFormatter(cell, row) {
-    if (row.instock === 'INSTOCK') {
-      return (
-        <span>
-          <strong style={ { color: 'green' } }>$ { cell }</strong>
-        </span>
-      )
-    }
-  
-    return (
-      <span>$ { cell } </span>
-    );
-  }
-
   const columns = [
     { dataField: 'type', text: 'Type' },
     { dataField: 'name', text: 'Name' },
