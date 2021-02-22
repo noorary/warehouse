@@ -7,7 +7,7 @@ import 'react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.m
 
 const Product = ({ products }) => {
 
-  if (products.length === 0 || products === undefined) {
+  if (products === undefined) {
     products = []
   }
 
