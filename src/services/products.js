@@ -1,6 +1,6 @@
 /* eslint-disable import/no-anonymous-default-export */
 import axios from 'axios'
-const baseUrl = 'https://nr-warehouse-api.herokuapp.com/products'
+const baseUrl = 'http://nr-warehouse-api-dev.eu-central-1.elasticbeanstalk.com/products'
 
 const getAll = async (product) => {
 
